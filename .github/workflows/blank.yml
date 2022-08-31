@@ -25,12 +25,17 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: download & extraction
+        run: wget https://ftp.gnu.org/gnu/gcc/gcc-12.2.0/gcc-12.2.0.tar.xz && tar -xvf gcc-12.2.0.tar.xz
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+      - name: renamer
+        run: mv gcc-12.2.0 gcc-12
+        
+      - name: gcc
+        run: cd gcc-12 && contrib/download_prerequisites && ./configure --prefix=$HOME/GCC-12-Github --enable-languages=c,c++,fortran,go --build=x86_64-pc-linux-gnu --with-pkgversion="DevG++ GCC beta" --with-gcc-major-version-only --disable-multilib && make && make check-gcc && make install
+
+      - name: Upload Artifact GitHub Action
+          uses: actions/upload-artifact@v2
+          with:
+            name: assets-for-download
+            path: $HOME/GCC-12-Github
