@@ -23,7 +23,7 @@ jobs:
       - name: renamer
         run: mv gcc-12.2.0 gcc-12
         
-      - name: go to gcc
+      - name: gcc
         run: cd gcc-12 && contrib/download_prerequisites && ./configure --prefix=$HOME/GCC-12-Github --enable-languages=c,c++,fortran,go --build=x86_64-pc-linux-gnu --with-pkgversion="DevG++ GCC beta" --with-gcc-major-version-only --disable-multilib && make && make check-gcc && make install
 
       - name: Upload Artifact GitHub Action
@@ -31,4 +31,3 @@ jobs:
           with:
             name: assets-for-download
             path: $HOME/GCC-12-Github
-         
