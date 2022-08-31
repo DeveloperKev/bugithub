@@ -26,8 +26,8 @@ jobs:
       - name: gcc
         run: cd gcc-12 && contrib/download_prerequisites && ./configure --prefix=$HOME/GCC-12-Github --enable-languages=c,c++,fortran,go --build=x86_64-pc-linux-gnu --with-pkgversion="DevG++ GCC beta" --with-gcc-major-version-only --disable-multilib && make && make check-gcc && make install
 
-      - name: Upload Artifact GitHub Action
-      - uses: actions/download-artifact@v3
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v2
         with:
-            name: assets-for-download
-            path: $HOME/GCC-12-Github
+          name: assets-for-download
+          path: $HOME/GCC-12-Github
