@@ -33,7 +33,7 @@ jobs:
           path: /home/runner/work/bugithub/GCC-12-Github
           
       - name: checkdir
-        run: pwd
+        run: ls -la
       
       - name: once again
-        run: cd /home/runner/work/bugithub/ && pwd
+        run: cd /home/runner/work/bugithub/ && ls -la
