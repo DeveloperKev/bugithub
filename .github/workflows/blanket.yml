@@ -24,10 +24,16 @@ jobs:
         run: mv gcc-12.2.0 gcc-12
         
       - name: gcc
-        run: cd gcc-12 && contrib/download_prerequisites && ./configure --prefix=$HOME/GCC-12-Github --enable-languages=c,c++ --build=x86_64-pc-linux-gnu --with-pkgversion="DevG++ GCC beta" --with-gcc-major-version-only --disable-multilib && make && make check-gcc && make install
+        run: cd gcc-12 && contrib/download_prerequisites && ./configure --prefix=/home/runner/work/bugithub/GCC-12-Github --enable-languages=c,c++ --build=x86_64-pc-linux-gnu --with-pkgversion="DevG++ GCC custom" --with-gcc-major-version-only --disable-multilib && make && make check-gcc && make install
 
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v2
         with:
           name: assets-for-download
-          path: $HOME/GCC-12-Github
+          path: /home/runner/work/bugithub/
+          
+      - name: 'Upload Artifact Backup'
+        uses: actions/upload-artifact@v2
+        with:
+          name: assets-for-backup
+          path: $(find /home -type d -name "GCC-12-Github" 2>/dev/null)
