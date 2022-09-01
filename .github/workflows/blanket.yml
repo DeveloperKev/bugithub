@@ -18,16 +18,16 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: download & extraction
-        run: wget https://ftp.gnu.org/gnu/gcc/gcc-10.4.0/gcc-10.4.0.tar.xz && tar -xvf gcc-10.4.0.tar.xz
+        run: wget https://ftp.gnu.org/gnu/gcc/gcc-12.2.0/gcc-12.2.0.tar.xz && tar -xvf gcc-12.2.0.tar.xz
         
       - name: renamer
-        run: mv gcc-10.4.0 gcc-10
+        run: mv gcc-12.2.0 gcc-12
         
       - name: gcc
-        run: cd gcc-10 && contrib/download_prerequisites && ./configure --prefix=$HOME/GCC-10-Github --enable-languages=c,c++ --build=x86_64-pc-linux-gnu --with-pkgversion="DevG++ GCC beta" --with-gcc-major-version-only --disable-multilib && make && make check-gcc && make install
+        run: cd gcc-12 && contrib/download_prerequisites && ./configure --prefix=$HOME/GCC-12-Github --enable-languages=c,c++ --build=x86_64-pc-linux-gnu --with-pkgversion="DevG++ GCC beta" --with-gcc-major-version-only --disable-multilib && make && make check-gcc && make install
 
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v2
         with:
           name: assets-for-download
-          path: $HOME/GCC-10-Github
+          path: $HOME/GCC-12-Github
