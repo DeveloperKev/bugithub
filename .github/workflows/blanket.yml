@@ -24,10 +24,10 @@ jobs:
         run: mv gcc-12.2.0 gcc-12
         
       - name: gcc
-        run: cd gcc-12 && contrib/download_prerequisites && ./configure --prefix=/home/runner/work/bugithub/GCC-12-Github --enable-languages=c,c++ --build=x86_64-pc-linux-gnu --with-pkgversion="DevG++ GCC custom" --with-gcc-major-version-only --disable-multilib && make && make-gcc && make install
+        run: cd gcc-12 && contrib/download_prerequisites && ./configure --prefix=/home/runner/work/bugithub/GCC-12-Github --enable-languages=c,c++ --build=x86_64-pc-linux-gnu --with-pkgversion="DevG++ GCC custom" --with-gcc-major-version-only --disable-multilib && make && make check-gcc && make install
         
       - name: checkdir
-        run: cd & ls -la
+        run: cd && ls -la
         
       - name: 'Upload Artifact Edit2'
         uses: actions/upload-artifact@v2
